@@ -1,5 +1,6 @@
 from Contacts import Contacts
 from person import Person
+from time import time
 
 def menu():
     running = True
