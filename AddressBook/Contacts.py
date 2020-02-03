@@ -7,6 +7,7 @@ class Contacts(object):
         self.total_contacts = 0
 
     def populate(self):
+        # Populates address book with test data from Mockaroo, includes 1000 entries
         with open('MOCK_DATA.csv', mode='r') as csv_file:
             csv_reader = csv.DictReader(csv_file)
             line_count = 0
@@ -19,6 +20,7 @@ class Contacts(object):
                 self.people[self.total_contacts] = new_person
 
     def add_person(self):
+        # Creates a new contact in the address book, uses the "total_contacts" counter as the Key and the Person object as the value in the dictionary people
         fname = input("Enter First Name: ")
         lname = input("Enter Last Name: ")
         street = input("Enter Street Address: ")
@@ -33,6 +35,7 @@ class Contacts(object):
         self.people[self.total_contacts] = new_person
 
     def remove_person(self):
+        # Searches contacts by last name and then removes, if found.  Will currently only remove one person object, no handling for people with common names
         lname = input("Search by Last Name: ")
         found = False
         for contact in self.people:
@@ -46,6 +49,7 @@ class Contacts(object):
             print(f"{lname} NOT FOUND")
 
     def update_person(self):
+        # Searches contacts by last name, prompts user to select field to edit and then for the updated information. Loops until user selects option 10
         lname = input("Search by Last Name: ")
         found = False
         for contact in self.people:
@@ -99,9 +103,8 @@ class Contacts(object):
                     updating = False
                     break
 
-
-
     def find_person(self):
+        # Searches contacts by last name and prints out the matching result, currently no functionality for multiple responses
         lname = input("Search by Last Name: ")
         found = False
         for contact in self.people:
@@ -116,6 +119,7 @@ class Contacts(object):
             print(f"{lname} NOT FOUND")
 
     def find_birthday_month(self):
+        # Searches contacts by last name, gathers all matching responses into separate dictionary and prints
         month = input("Search Birthdays by Month: ")
         found = False
         results = {}
@@ -134,6 +138,7 @@ class Contacts(object):
             print('No Birthdays in that Month')
 
     def print_contacts(self):
+        # Prints all of the contacts in the people dictionary
         for contact in self.people:
             print(f"NAME - {self.people[contact].first_name} {self.people[contact].last_name}")
             print(f"ADDRESS - {self.people[contact].street_address} {self.people[contact].city_address}, {self.people[contact].state_address} {self.people[contact].zip_address}")
