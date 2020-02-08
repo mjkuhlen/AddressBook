@@ -35,5 +35,3 @@ def menu():
 test = Contacts()
 test.populate()
 menu()
-
-

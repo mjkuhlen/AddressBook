@@ -1,4 +1,5 @@
 from person import Person
+import operator
 import csv
 
 class Contacts(object):
@@ -127,8 +128,7 @@ class Contacts(object):
 
     def print_contacts(self):
         # Prints all of the contacts in the people dictionary
-        for contact in self.people:
-            print(f"NAME - {self.people[contact].first_name} {self.people[contact].last_name}")
-            print(f"ADDRESS - {self.people[contact].street_address} {self.people[contact].city_address}, {self.people[contact].state_address} {self.people[contact].zip_address}")
-
-
+        for person in (sorted(self.people.values(), key=operator.attrgetter('last_name'))):
+            print(f"NAME - {person.first_name} {person.last_name}")
+            print(f"BIRTHDAY - {person.birth_month} / {person.birth_day} / {person.birth_year}")
+            print(f"ADDRESS - {person.street_address} {person.city_address}, {person.state_address} {person.zip_address}\n")
