@@ -127,7 +127,7 @@ class Contacts(object):
             print('No Birthdays in that Month')
 
     def print_contacts(self):
-        # Prints all of the contacts in the people dictionary
+        # Prints all of the contacts in the people dictionary in alphabetical order
         for person in (sorted(self.people.values(), key=operator.attrgetter('last_name'))):
             print(f"NAME - {person.first_name} {person.last_name}")
             print(f"BIRTHDAY - {person.birth_month} / {person.birth_day} / {person.birth_year}")
