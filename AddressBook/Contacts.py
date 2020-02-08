@@ -36,27 +36,16 @@ class Contacts(object):
 
     def remove_person(self):
         # Searches contacts by last name and then removes, if found.  Will currently only remove one person object, no handling for people with common names
-        lname = input("Search by Last Name: ")
-        found = False
-        for contact in self.people:
-            if self.people[contact].last_name == lname:
-                found = True
-                searched_person = contact
-                break
+        found, searched_person = self.find_person()
         if found == True:
+            print(f"Removing {searched_person.first_name} {searched_person.last_name} from the Address Book")
             self.people.pop(searched_person)
         else:
-            print(f"{lname} NOT FOUND")
+            print("Person NOT FOUND in Address Book")
 
     def update_person(self):
         # Searches contacts by last name, prompts user to select field to edit and then for the updated information. Loops until user selects option 10
-        lname = input("Search by Last Name: ")
-        found = False
-        for contact in self.people:
-            if self.people[contact].last_name == lname:
-                found = True
-                searched_person = self.people[contact]
-                break
+        found, searched_person = self.find_person()
         if found:
             updating = True
             while updating:
@@ -102,21 +91,20 @@ class Contacts(object):
                 elif selection == '10':
                     updating = False
                     break
+        else:
+            print('Person not found in Address Book.')
 
     def find_person(self):
         # Searches contacts by last name and prints out the matching result, currently no functionality for multiple responses
         lname = input("Search by Last Name: ")
         found = False
+        searched_person = None
         for contact in self.people:
             if self.people[contact].last_name == lname:
                 found = True
                 searched_person = self.people[contact]
                 break
-        if found == True:
-            print(f"NAME - {searched_person.first_name} {searched_person.last_name}")
-            print(f"ADDRESS - {searched_person.street_address} {searched_person.city_address}, {searched_person.state_address} {searched_person.zip_address}")
-        else:
-            print(f"{lname} NOT FOUND")
+        return (found, searched_person)  
 
     def find_birthday_month(self):
         # Searches contacts by last name, gathers all matching responses into separate dictionary and prints
